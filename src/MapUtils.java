@@ -60,6 +60,21 @@ public class MapUtils {
         return resultMap;
     }
 
+    /**
+     * 获取map中对应键的值，若键不存在抛异常
+     * @param map map对象
+     * @param key 键
+     * @return 键对应的值
+     */
+    public static Object fetch(Map map, Object key) {
+        Object result = map.get(key);
+
+        if (result == null) {
+            throw new RuntimeException("Map中不存在该key");
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         // 创建map对象并同时存入多个值（使用toMap方法将保留之前存入的值）
         Map<Object, Object> map1 = MapUtils.value(1, "Jack").value(2, "Andy").value(3, "Kim").toMap();
@@ -80,6 +95,13 @@ public class MapUtils {
         System.out.println(map3);
          /*
         运行结果：{Float=32.0, Time=Mon May 28 01:03:08 CST 2018, Age=27}
+         */
+
+         // 创建map对象并填入键值对，如果fetch方法获取不到键Andy对应的值，则抛异常
+        Object result = fetch(new HashMap() {{ put("Andy", 13); }}, "Andy");
+        System.out.println(result);
+        /*
+        运行结果：13
          */
     }
 }
