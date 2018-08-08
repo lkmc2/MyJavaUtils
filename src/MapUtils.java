@@ -72,6 +72,7 @@ public class MapUtils {
         if (result == null) {
             throw new RuntimeException("Map中不存在该key");
         }
+
         return result;
     }
 
