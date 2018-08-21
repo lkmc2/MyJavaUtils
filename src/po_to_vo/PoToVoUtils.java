@@ -104,6 +104,11 @@ public class PoToVoUtils {
 
         System.out.println("product = " + product);
         System.out.println("productVo = " + productVo);
+        /*
+            运行结果：
+            product = Product{id=1, name='Jack', age=13, birthday=Tue Aug 21 20:10:23 CST 2018, count=302}
+            productVo = ProductVo{id=1, name='Jack', count=302}
+         */
     }
 
 }
