@@ -1,4 +1,4 @@
-package getter_setter;
+package com.lin.getter_setter;
 
 import java.lang.annotation.*;
 

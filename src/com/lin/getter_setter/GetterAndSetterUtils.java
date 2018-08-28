@@ -1,4 +1,4 @@
-package getter_setter;
+package com.lin.getter_setter;
 
 import java.io.File;
 import java.io.IOException;
@@ -141,12 +141,16 @@ public class GetterAndSetterUtils {
 
 
     private static String getPackageName(File file) {
-        String path = file.getPath();
-        int startSplitIndex = path.indexOf("src") + 4;
-        int endSplitIndex = path.lastIndexOf(".");
+        String fileName = file.getPath();
+        int startSplitIndex = fileName.indexOf("com");
+        int endSplitIndex = fileName.lastIndexOf(".");
 
-        String packageName = path.substring(startSplitIndex, endSplitIndex).replaceAll("\\\\", ".");
-        return packageName;
+        if (startSplitIndex < 0 || endSplitIndex < 0) {
+            throw new RuntimeException("获取文件包名失败，文件名为：" + fileName);
+        }
+
+        fileName = fileName.substring(startSplitIndex, endSplitIndex).replaceAll("\\\\", ".");
+        return fileName;
     }
 
     public static void main(String[] args) {

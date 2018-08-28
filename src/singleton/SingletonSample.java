@@ -27,7 +27,7 @@ public class SingletonSample {
     public static void main(String[] args) {
 
         // 为Printer类创建单例对象
-        Singleton<Printer> printerSingleton = new Singleton<>() {
+        Singleton<Printer> printerSingleton = new Singleton<Printer>() {
             @Override
             protected Printer create() {
                 return new Printer();
