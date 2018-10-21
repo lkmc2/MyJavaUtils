@@ -3,7 +3,6 @@ package exception;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
 import java.time.DateTimeException;
 
 /**
@@ -13,32 +12,66 @@ import java.time.DateTimeException;
  */
 public final class ExceptionUtils {
 
+    public static void throwRuntimeExceptionIfNull(Object obj, Object... params) {
+        ifNullThrow(RuntimeException.class, obj, params);
+    }
+
+    public static void throwNullPointerExceptionIfNull(Object obj, Object... params) {
+        ifNullThrow(NullPointerException.class, obj, params);
+    }
+
+    public static void throwSecurityExceptionIfNull(Object obj, Object... params) {
+        throwOf(SecurityException.class, obj, params);
+    }
+
+    public static void throwIllegalArgumentExceptionIfNull(Object obj, Object... params) {
+        ifNullThrow(IllegalArgumentException.class, obj, params);
+    }
+
+    public static void throwDateTimeExceptionIfNull(Object obj, Object... params) {
+        throwOf(DateTimeException.class, obj, params);
+    }
+
+    public static void throwIndexOfBoundsExceptionIfNull(Object obj, Object... params) {
+        ifNullThrow(IndexOutOfBoundsException.class, obj, params);
+    }
+
+    /**
+     * 当参数obj等于null时，抛出指定的异常
+     * @param clazz  Exception子类的Class类型
+     * @param obj 需要进行判空的对象
+     * @param params 构造器参数
+     * @param <T>    Exception子类
+     * @throws T 将抛出的异常的类型
+     */
+    public static <T extends Exception> void ifNullThrow(Class<T> clazz, Object obj, Object... params) throws T {
+        if (obj == null) {
+            throw reflectCreateException(clazz, params);
+        }
+    }
+
     public static void throwRuntimeException(Object... params) {
-        of(RuntimeException.class, params);
+        throwOf(RuntimeException.class, params);
     }
 
     public static void throwNullPointerException(Object... params) {
-        of(NullPointerException.class, params);
+        throwOf(NullPointerException.class, params);
     }
 
     public static void throwSecurityException(Object... params) {
-        of(SecurityException.class, params);
+        throwOf(SecurityException.class, params);
     }
 
     public static void throwIllegalArgumentException(Object... params) {
-        of(IllegalArgumentException.class, params);
+        throwOf(IllegalArgumentException.class, params);
     }
 
     public static void throwDateTimeException(Object... params) {
-        of(DateTimeException.class, params);
+        throwOf(DateTimeException.class, params);
     }
 
     public static void throwIndexOfBoundsException(Object... params) {
-        of(IndexOutOfBoundsException.class, params);
-    }
-
-    public static void throwParseException(Object... params) throws ParseException {
-        of(ParseException.class, params);
+        throwOf(IndexOutOfBoundsException.class, params);
     }
 
     /**
@@ -48,7 +81,7 @@ public final class ExceptionUtils {
      * @param <T>    Exception子类
      * @throws T 将抛出的异常的类型
      */
-    public static <T extends Exception> void of(Class<T> clazz, Object... params) throws T {
+    public static <T extends Exception> void throwOf(Class<T> clazz, Object... params) throws T {
         throw reflectCreateException(clazz, params);
     }
 
