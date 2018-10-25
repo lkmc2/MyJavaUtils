@@ -20,7 +20,10 @@ public class ExceptionUtilsExample {
         // 当此对象为null时，以下方法会抛出异常
         Object obj = null;
 
-        // ExceptionUtils也提供了当传入的第一个参数为null时，抛出指定异常的方法
+        /*
+            ExceptionUtils也提供了当传入的第一个参数为null时，抛出指定异常的方法，
+            可根据该异常类的构造方法填入第二个及之后参数
+        */
         ExceptionUtils.throwRuntimeExceptionIfNull(obj, "对象必须有值");
         ExceptionUtils.throwNullPointerExceptionIfNull(obj, "参数不能为null");
 
