@@ -61,7 +61,7 @@ public class Objects {
             e.printStackTrace();
         }
 
-        throw new RuntimeException("无法创建该类的对象");
+        throw new RuntimeException(String.format("无法创建【%s】类的对象", clazz.getName()));
     }
 
     public static void main(String[] args) {
